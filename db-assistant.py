@@ -148,13 +148,13 @@ def main():
 
     while True:
         print("\nDual Boot Assistant")
-        print("1. Open Disk Management")
-        print("2. Extract ISO to a specific partition using 7-Zip")
-        print("3. Verify ISO integrity")
-        print("4. Install rEFInd Boot Manager")
-        print("5. Exit")
+        print("[1] Open Disk Management")
+        print("[2] Extract ISO to a specific partition using 7-Zip")
+        print("[3] Verify ISO integrity")
+        print("[4] Install rEFInd Boot Manager")
+        print("[5] Exit")
 
-        choice = input("Enter your choice (1-5): ")
+        choice = input("Enter your choice [1-5]: ")
 
         if choice == "1":
             open_disk_management()
