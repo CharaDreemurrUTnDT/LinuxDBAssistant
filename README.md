@@ -11,7 +11,7 @@ Install reFInd boot manager!
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
 # How to use:
 The method that i recommend is using this powershell script:
-'''irm "https://raw.githubusercontent.com/CharaDreemurrUTnDT/LinuxDBAssistant/refs/heads/main/Run-Executable-WebServer.ps1" | iex'''
+```irm "https://raw.githubusercontent.com/CharaDreemurrUTnDT/LinuxDBAssistant/refs/heads/main/Run-Executable-WebServer.ps1" | iex```
 You can also download the .exe and .py from the Releases section.
 # Guide 
 - First, shrink your C: Drive for free space for Linux and the partition the ISO is gonna be stored in.
