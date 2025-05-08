@@ -1,5 +1,5 @@
 # Define the URL to the .exe file on the web server
-$exeUrl = "https://raw.githubusercontent.com/CharaDreemurrUTnDT/LinuxDBAssistant/refs/heads/main/db-assistant-0.0.3.exe"
+$exeUrl = "https://raw.githubusercontent.com/CharaDreemurrUTnDT/LinuxDBAssistant/refs/heads/main/versions/0.0.4/db-assistant-0.0.4.exe"
 
 # Define the local path where the .exe will be downloaded
 $localExePath = "C:\linuxinstaller\linuxinstaller.exe"
