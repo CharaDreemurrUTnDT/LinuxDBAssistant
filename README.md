@@ -22,11 +22,11 @@ You can also download the .exe and .py from the Releases section.
 - Choose the efi file on the partition you created. (If it doesn´t work, try another file!)
 - Follow the install process for your distribution!
 # Questions you will probably ask.
-Q: Why did you create this?
-A: I installed linux a bunch of times on my friend´s laptop, without any USB, just booting from EFI files natively. When i got my PC that came with Windows 10, i was excited to install Linux on it, but was dissapointed because of my motherboard not having a option to boot from EFI files. I then remembered this frustation a few days ago, and decided to bring the fix to life!
-Q:Why reFInd boot manager?:
-A: bcdedit was giving too many error, and reFInd detects every efi file.
-Q: Why python?
-A: Python was the easiest option.
+- Q: Why did you create this?
+- A: I installed linux a bunch of times on my friend´s laptop, without any USB, just booting from EFI files natively. When i got my PC that came with Windows 10, i was excited to install Linux on it, but was dissapointed because of my motherboard not having a option to boot from EFI files. I then remembered this frustation a few days ago, and decided to bring the fix to life!
+- Q:Why reFInd boot manager?:
+- A: bcdedit was giving too many errors when trying to add the efi file as a boot option, and reFInd detects every efi file.
+- Q: Why python?
+- A: Python was the easiest option.
 # License
 The license that this project is using, is MIT, you can see the details of the license on the section for the License.
