@@ -1,10 +1,10 @@
 # LinuxDBAssistant
 This is for assisting Windows Users to Dual Boot Windows and Linux without an USB Drive, giving them options to assist them!
 # Options
-Open Disk management
-Extract the iso to a specific partition using 7zip (7zip needs to be on the PATH)
-Verify ISO Integrity (This option is still a WIP, so i havent tested it yet)
-Install reFInd boot manager!
+- Open Disk management
+- Extract the iso to a specific partition using 7zip (7zip needs to be on the PATH)
+- Verify ISO Integrity (It needs to be a sha256 or md5 hash, OpenPGP support is planned)
+- Install reFInd boot manager!
 # Requirements
 - Python (If you are using the .py file)
 - 7zip added to PATH
