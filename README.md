@@ -28,3 +28,5 @@ The only official method is downloading the latest (or another version) from Git
 - A: Python was the easiest option.
 # License
 The license that this project is using, is MIT, you can see the details of the license on the section for the License.
+# Why is there no more files besides the READme and the license on the source code?
+Removed all the added files because the source code was getting messy, and the powershell script is now deprecated so there is now no use for the versions folder.
