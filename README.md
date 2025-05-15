@@ -8,8 +8,10 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Python (If you are using the .py file)
 - 7zip added to PATH
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
-# How to use:
-The only official method is downloading the latest (or another version) from Github Releases. 
+# How to download:
+-The only official method is downloading the latest (or another version) from Github Releases.
+-The only use for the debug/.py version, is to make a github issue.
+-I´d recommend using the normal version otherwise.
 # Guide 
 - First, shrink your C: Drive for free space for Linux and the partition the ISO is gonna be stored in.
 - Create a partition, the size depends on the size of the distributions´s iso. (I personally recommend FAT32 for the format, if there is a file bigger than 4GB on your distribution´s iso, use NTFS.)
