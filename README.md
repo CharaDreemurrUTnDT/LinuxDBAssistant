@@ -7,7 +7,7 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Change localtime to UTC Time (Proceed with caution!) (I think if you dual booted before you noticed the time was off every restart you did to Windows. Well, with this option, both Linux and Windows will be using UTC time, which means, no more errors in time with this!)
 # Requirements
 - Python (If you are using the .py file)
-- 7zip or NanaZIP added to PATH
+- 7zip added to PATH or NanaZIP
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
 # How to download:
 - The only official method is downloading the latest (or another version) from Github Releases.
