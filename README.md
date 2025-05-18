@@ -1,4 +1,4 @@
-# LinuxDBAssistant
+https://raw.githubusercontent.com/CharaDreemurrUTnDT/LinuxDBAssistant/refs/heads/main/LinuxDBAssistant.png
 This is for assisting Windows Users to Dual Boot Windows and Linux without an USB Drive, giving them options to assist them!
 # Options
 - Open Disk management
