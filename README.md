@@ -31,4 +31,6 @@ The license that this project is using, is MIT, you can see the details of the l
 # Why is there no more files on the source code?
 Removed all the added files because the source code was getting messy, and the powershell script is now deprecated so there is now no use for the versions folder.
 If you want to DIY the .exe file, there's a tutorial here: https://github.com/CharaDreemurrUTnDT/LinuxDBAssistant/blob/main/Compiling.md
-
+# Distros that do not support this method
+- Debian
+- EndeavourOS
