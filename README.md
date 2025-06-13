@@ -6,12 +6,15 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Verify ISO Integrity (It needs to be a sha256 or md5 hash, OpenPGP support is planned)
 - Change localtime to UTC Time (Proceed with caution!) (I think if you dual booted before you noticed the time was off every restart you did to Windows. Well, with this option, both Linux and Windows will be using UTC time, which means, no more errors in time with this!)
 - Redirect user to MiniTool´s Partition Wizard (This should only be used in case Disk Management doesn´t allow the user to shrink the necessary space, otherwise you should use Disk Management.)
+- Choose your distro!
+- Show the list of currently known unsupported distros.
+- Reboot to Windows Recovery!
 - 
 # Requirements
 - Python (If you are using the .py file)
 - 7zip added to PATH or NanaZIP
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
-- Pillow, Requests and PyWebView for the .py version (can be installed with ````pip install requests pillow pywebview````
+- Pillow, Requests and PyWebView for the .py version (can be installed with ````pip install requests pillow pywebview````)
 # How to download:
 - The only official method is downloading the latest (or another version) from Github Releases.
 - The only use for the debug/.py version, is to make a github issue.
@@ -32,7 +35,7 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 The license that this project is using, is MIT, you can see the details of the license on the section for the License.
 # Why is there no more files on the source code?
 Removed all the added files because the source code was getting messy, and the powershell script is now deprecated so there is now no use for the versions folder.
-If you want to DIY the .exe file, there's a tutorial here: https://github.com/CharaDreemurrUTnDT/LinuxDBAssistant/blob/main/Compiling.md
+If you want to compile the .exe file yourself, there's a tutorial here: https://github.com/CharaDreemurrUTnDT/LinuxDBAssistant/blob/main/Compiling.md
 # Distros that do not support this method
 - Debian
 - EndeavourOS
