@@ -2,14 +2,13 @@
 This is for assisting Windows Users to Dual Boot Windows and Linux without an USB Drive, giving them options to assist them!
 # Options
 - Open Disk management
-- Extract the iso to a specific partition using 7zip (7zip needs to be on the PATH)
+- Extract the iso to a specific partition using 7zip or NanaZip (7zip needs to be on the path.)
 - Verify ISO Integrity (It needs to be a sha256 or md5 hash, OpenPGP support is planned)
 - Change localtime to UTC Time (Proceed with caution!) (I think if you dual booted before you noticed the time was off every restart you did to Windows. Well, with this option, both Linux and Windows will be using UTC time, which means, no more errors in time with this!)
 - Redirect user to MiniTool´s Partition Wizard (This should only be used in case Disk Management doesn´t allow the user to shrink the necessary space, otherwise you should use Disk Management.)
 - Choose your distro!
 - Show the list of currently known unsupported distros.
 - Reboot to Windows Recovery!
-- 
 # Requirements
 - Python (If you are using the .py file)
 - 7zip added to PATH or NanaZIP
