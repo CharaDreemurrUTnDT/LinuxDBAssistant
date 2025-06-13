@@ -11,7 +11,7 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Python (If you are using the .py file)
 - 7zip added to PATH or NanaZIP
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
-- Pillow, Requests and PyWebView for the .py version (can be installed with ''''pip install requests pillow pywebview''''
+- Pillow, Requests and PyWebView for the .py version (can be installed with ````pip install requests pillow pywebview````
 # How to download:
 - The only official method is downloading the latest (or another version) from Github Releases.
 - The only use for the debug/.py version, is to make a github issue.
