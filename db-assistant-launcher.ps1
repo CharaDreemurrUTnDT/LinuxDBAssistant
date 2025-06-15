@@ -1,5 +1,4 @@
-# LinuxDBAssistant Launcher - PowerShell Script (EXE only, downloads from internet links)
-# Edit the URLs below to point to your .exe files online.
+# LinuxDBAssistant Launcher - PowerShell Script (EXE only, uses your shortened URLs)
 
 function Show-Menu {
     Clear-Host
@@ -21,7 +20,7 @@ function Show-Menu {
     Write-Host ""
 }
 
-function Get-And-Run {
+function Download-And-Run {
     param(
         [string]$url,
         [string]$filename
@@ -30,7 +29,7 @@ function Get-And-Run {
     if (!(Test-Path $tempPath)) {
         Write-Host "`e[38;5;146mDownloading $filename...`e[0m"
         try {
-            Invoke-WebRequest -Uri $url -OutFile $tempPath
+            Invoke-WebRequest -Uri $url -OutFile $tempPath -UseBasicParsing
         } catch {
             Write-Host "`e[31mFailed to download $filename. Check your internet connection or the link.`e[0m"
             return
@@ -41,31 +40,28 @@ function Get-And-Run {
     Start-Process wt.exe -ArgumentList $tempPath
 }
 
-function Start-GUI {
-    # Replace the URL below with your GUI .exe download link
+function Run-GUI {
     $guiUrl = "https://tinyurl.com/db-assistant-gui"
-    Get-And-Run -url $guiUrl -filename "db-assistant-2.1.exe"
+    Download-And-Run -url $guiUrl -filename "LinuxDBAssistant-GUI.exe"
 }
 
-function Start-Terminal-Colored {
-    # Replace the URL below with your colored terminal .exe download link
+function Run-Terminal-Colored {
     $termUrl = "https://tinyurl.com/db-assistant-terminal"
-    Get-And-Run -url $termUrl -filename "db-assistant-terminal-2.1.exe"
+    Download-And-Run -url $termUrl -filename "LinuxDBAssistant-Terminal-Colored.exe"
 }
 
-function Start-Terminal-NonColored {
-    # Replace the URL below with your non-colored terminal .exe download link
+function Run-Terminal-NonColored {
     $termUrl = "https://tinyurl.com/db-assistant-nc"
-    Get-And-Run -url $termUrl -filename "db-assistant-2.1-terminal-nc.exe"
+    Download-And-Run -url $termUrl -filename "LinuxDBAssistant-Terminal-NonColored.exe"
 }
 
 do {
     Show-Menu
     $choice = Read-Host "Enter your choice"
     switch ($choice) {
-        "1" { Start-GUI }
-        "2" { Start-Terminal-Colored }
-        "3" { Start-Terminal-NonColored }
+        "1" { Run-GUI }
+        "2" { Run-Terminal-Colored }
+        "3" { Run-Terminal-NonColored }
         "4" { Write-Host "`e[38;5;146mGoodbye!`e[0m"; break }
         default { Write-Host "`e[31mInvalid choice. Please try again.`e[0m" }
     }
