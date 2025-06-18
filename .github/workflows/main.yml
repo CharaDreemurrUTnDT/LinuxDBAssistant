@@ -34,7 +34,7 @@ jobs:
       - name: Build all .py scripts with PyInstaller (--no-console if needed)
         shell: bash
         run: |
-          cd $FOLDER
+          cd "${{ env.FOLDER }}"
           shopt -s nullglob
           pyfiles=(*.py)
           if [ ${#pyfiles[@]} -eq 0 ]; then
@@ -48,36 +48,28 @@ jobs:
               pyinstaller --onefile --icon=../../db.ico --noconsole "$f"
             fi
           done
-        env:
-          FOLDER: ${{ env.FOLDER }}
 
       - name: Collect built EXEs
         shell: bash
         run: |
           mkdir -p dist_upload
-          cd $FOLDER/dist
+          cd "${{ env.FOLDER }}/dist"
           cp *.exe ../../../dist_upload/
-        env:
-          FOLDER: ${{ env.FOLDER }}
 
       - name: Prepare Release Notes
         id: release_notes
         shell: bash
         run: |
           echo "## Changelog" > release_body.md
-          cat $FOLDER/changelog.md >> release_body.md
+          cat "${{ env.FOLDER }}/changelog.md" >> release_body.md
           echo -e "\n## Commit History\n" >> release_body.md
           git log --pretty=format:"- %h %s (%an, %ad)" --date=short >> release_body.md
-        env:
-          FOLDER: ${{ env.FOLDER }}
 
       - name: Get version tag (vX.X format from folder name)
         id: get_version
         run: |
-          VERSION="v${FOLDER_NAME}"
+          VERSION="v${{ env.FOLDER_NAME }}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-        env:
-          FOLDER_NAME: ${{ env.FOLDER_NAME }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
