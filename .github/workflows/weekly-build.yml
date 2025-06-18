@@ -3,7 +3,7 @@ name: Weekly Windows Build and Release
 on:
   schedule:
     - cron: '0 0 * * 0' # Every Sunday at 00:00 UTC
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-release:
@@ -23,13 +23,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller pillow requests pywebview
 
-      - name: Find folder with highest number
+      - name: Find folder with highest number in versions/
         id: find-folder
         shell: bash
         run: |
+          cd versions
           FOLDER=$(find . -maxdepth 1 -type d -regex './[0-9]+' | sed 's|./||' | sort -n | tail -n 1)
-          echo "FOLDER=$FOLDER" >> $GITHUB_ENV
-          echo "Folder with highest number: $FOLDER"
+          echo "FOLDER=versions/$FOLDER" >> $GITHUB_ENV
+          echo "Folder with highest number: versions/$FOLDER"
 
       - name: List all .py scripts in target folder
         id: list-py
@@ -45,7 +46,7 @@ jobs:
         run: |
           cd $FOLDER
           for f in *.py; do
-            pyinstaller --onefile --icon=../db.ico "$f"
+            pyinstaller --onefile --icon=../../db.ico "$f"
           done
         env:
           FOLDER: ${{ env.FOLDER }}
@@ -54,7 +55,7 @@ jobs:
         run: |
           mkdir -p dist_upload
           cd $FOLDER/dist
-          cp *.exe ../../dist_upload/
+          cp *.exe ../../../dist_upload/
         env:
           FOLDER: ${{ env.FOLDER }}
 
@@ -66,12 +67,16 @@ jobs:
           cat $FOLDER/changelog.md >> release_body.md
           echo -e "\n## Commit History\n" >> release_body.md
           git log --pretty=format:"- %h %s (%an, %ad)" --date=short >> release_body.md
+        env:
+          FOLDER: ${{ env.FOLDER }}
 
       - name: Get version tag
         id: get_version
         run: |
-          VERSION="v${FOLDER:-$(date +'%Y%m%d%H%M%S')}"
+          VERSION="v$(basename $FOLDER)"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+        env:
+          FOLDER: ${{ env.FOLDER }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
