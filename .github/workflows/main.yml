@@ -25,7 +25,7 @@ jobs:
         id: build_and_release
         shell: pwsh
         run: |
-          Set-StrictMode -ErrorAction Stop
+          Set-StrictMode -Version Latest -ErrorAction Stop
           Set-Location versions
 
           Write-Host "Available folders:"
