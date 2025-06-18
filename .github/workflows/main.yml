@@ -36,7 +36,7 @@ jobs:
         shell: bash
         run: |
           cd $FOLDER
-          ls *.py > ../pyfiles.txt || true # create list or empty file if none found
+          ls *.py > ../pyfiles.txt || true
         env:
           FOLDER: ${{ env.FOLDER }}
 
@@ -44,7 +44,13 @@ jobs:
         shell: bash
         run: |
           cd $FOLDER
-          for f in *.py; do
+          shopt -s nullglob
+          pyfiles=(*.py)
+          if [ ${#pyfiles[@]} -eq 0 ]; then
+            echo "No .py files found to build."
+            exit 1
+          fi
+          for f in "${pyfiles[@]}"; do
             if [[ "$f" == *terminal* ]]; then
               pyinstaller --onefile --icon=../../db.ico "$f"
             else
@@ -55,6 +61,7 @@ jobs:
           FOLDER: ${{ env.FOLDER }}
 
       - name: Collect built EXEs
+        shell: bash
         run: |
           mkdir -p dist_upload
           cd $FOLDER/dist
