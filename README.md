@@ -16,7 +16,8 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Pillow, Requests and PyWebView for the .py version (can be installed with ````pip install requests pillow pywebview````)
 # How to download:
 [![Download from SourceForge](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/linuxdbassistant/files/v2.1/)
-[![GitHub release](https://img.shields.io/github/v/release/OWNER/REPO?label=Download%20from%20GitHub%20Releases)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases/tag/v2.1)
+[![GitHub release](https://img.shields.io/github/v/release/CharaUTnDT/LinuxDBAssistant?label=Download%20from%20GitHub%20Releases)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases/latest)
+- The only use for the .py version is for debugging.
 # Guide 
 - First, shrink your C: Drive for free space for Linux and the partition the ISO is gonna be stored in.
 - Create a partition, the size depends on the size of the distributions´s iso. (I personally recommend FAT32 for the format, if there is a file bigger than 4GB on your distribution´s iso, use NTFS.)
