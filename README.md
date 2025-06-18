@@ -1,5 +1,15 @@
 ![LinuxDBAssistant](https://github.com/user-attachments/assets/67e10e60-949f-417c-bee5-6a8897df35b0)
 This is for assisting Windows Users to Dual Boot Windows and Linux without an USB Drive, giving them options to assist them!
+
+[![License](https://img.shields.io/github/license/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/CharaUTnDT/LinuxDBAssistant?label=release)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases)
+[![Issues](https://img.shields.io/github/issues/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/pulls)
+[![Contributors](https://img.shields.io/github/contributors/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/CharaUTnDT/LinuxDBAssistant?style=flat-square)](https://github.com/CharaUTnDT/LinuxDBAssistant/network/members)
+[![Stars](https://img.shields.io/github/stars/CharaUTnDT/LinuxDBAssistant?style=flat-square)](https://github.com/CharaUTnDT/LinuxDBAssistant/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/commits)
+[![Last Release Date](https://img.shields.io/github/release-date/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases)
 # Options
 - Open Disk management
 - Extract the iso to a specific partition using 7zip or NanaZip (7zip needs to be on the path.)
