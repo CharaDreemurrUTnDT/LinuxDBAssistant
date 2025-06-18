@@ -15,9 +15,8 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - UEFI Bios. This will not work for Legacy Bios or UEFI-CSM.
 - Pillow, Requests and PyWebView for the .py version (can be installed with ````pip install requests pillow pywebview````)
 # How to download:
-- The only official method is downloading the latest (or another version) from Github Releases.
-- The only use for the debug/.py version, is to make a github issue.
-- I´d recommend using the normal version otherwise.
+[![Download from SourceForge](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/linuxdbassistant/files/v2.1/)
+[![GitHub release](https://img.shields.io/github/v/release/OWNER/REPO?label=Download%20from%20GitHub%20Releases)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases/latest)
 # Guide 
 - First, shrink your C: Drive for free space for Linux and the partition the ISO is gonna be stored in.
 - Create a partition, the size depends on the size of the distributions´s iso. (I personally recommend FAT32 for the format, if there is a file bigger than 4GB on your distribution´s iso, use NTFS.)
