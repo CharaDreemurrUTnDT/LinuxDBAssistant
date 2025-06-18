@@ -1,2 +1,2 @@
-Debian
-EndeavourOS
+- Debian
+- EndeavourOS
