@@ -41,12 +41,16 @@ jobs:
         env:
           FOLDER: ${{ env.FOLDER }}
 
-      - name: Build all .py scripts with PyInstaller
+      - name: Build all .py scripts with PyInstaller (--no-console if needed)
         shell: bash
         run: |
           cd $FOLDER
           for f in *.py; do
-            pyinstaller --onefile --icon=../../db.ico "$f"
+            if [[ "$f" == *terminal* ]]; then
+              pyinstaller --onefile --icon=../../db.ico "$f"
+            else
+              pyinstaller --onefile --icon=../../db.ico --noconsole "$f"
+            fi
           done
         env:
           FOLDER: ${{ env.FOLDER }}
