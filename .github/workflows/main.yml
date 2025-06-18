@@ -23,48 +23,55 @@ jobs:
 
       - name: Build and prepare release
         id: build_and_release
-        shell: bash
+        shell: pwsh
         run: |
-          set -e
-          cd versions
-          echo "Available folders:"
-          ls -l
-          highest_folder=$(find . -maxdepth 1 -type d -regex './[0-9]+(\.[0-9]+)?' | sed 's|./||' | sort -V | tail -n 1)
-          echo "Highest folder: $highest_folder"
-          cd "$highest_folder"
+          Set-StrictMode -ErrorAction Stop
+          Set-Location versions
 
-          # Build all .py files and rename .exe outputs to remove .py extension if needed
-          echo "Building all .py files in $(pwd):"
-          ls *.py || { echo 'No .py files found to build.'; exit 1; }
-          for f in *.py; do
-            base="${f%.py}"
-            echo "Building $f"
-            if [[ "$f" == *terminal* ]]; then
-              pyinstaller --onefile --icon=../../db.ico "$f"
-            else
-              pyinstaller --onefile --icon=../../db.ico --noconsole "$f"
-            fi
-            # Optionally, rename the output exe file in dist/
-            if [ -f "dist/${base}.exe" ]; then
-              mv "dist/${base}.exe" "dist/${base}.exe"
-            fi
-          done
+          Write-Host "Available folders:"
+          Get-ChildItem -Directory | ForEach-Object { Write-Host $_.Name }
 
-          # Handle changelog file: look for changelog.md or changelog, build and rename if needed
-          if [ -f "changelog.md" ]; then
-            cp "changelog.md" ../../../release_body.md
-          elif [ -f "changelog" ]; then
-            cp "changelog" ../../../release_body.md
-          else
-            echo "No changelog found." > ../../../release_body.md
-          fi
+          # Find highest-numbered folder
+          $folders = Get-ChildItem -Directory | Where-Object { $_.Name -match '^\d+(\.\d+)?$' } | Sort-Object { [version]$_.Name }
+          if (-not $folders) { Write-Error "No version folders found."; exit 1 }
+          $highest_folder = $folders[-1].Name
+          Write-Host "Highest folder: $highest_folder"
+          Set-Location $highest_folder
 
-          mkdir -p ../../../dist_upload
-          cp dist/*.exe ../../../dist_upload/
-          cd ../..
-          echo -e "\n## Commit History" >> release_body.md
-          git log --pretty=format:"- %h %s (%an, %ad)" --date=short >> release_body.md
-          echo "tag=v$highest_folder" >> $GITHUB_OUTPUT
+          # Find and build all .py files
+          $pyfiles = Get-ChildItem -Filter *.py
+          if (-not $pyfiles) { Write-Error "No .py files found to build."; exit 1 }
+          foreach ($f in $pyfiles) {
+            $basename = [System.IO.Path]::GetFileNameWithoutExtension($f.Name)
+            Write-Host "Building $($f.Name)..."
+            if ($f.Name -like "*terminal*") {
+              pyinstaller --onefile --icon=../../db.ico $($f.Name)
+            } else {
+              pyinstaller --onefile --icon=../../db.ico --noconsole $($f.Name)
+            }
+            # Optionally, re-rename output if needed (not necessary if PyInstaller output is correct)
+            if (Test-Path "dist/$basename.exe") {
+              Move-Item "dist/$basename.exe" "dist/$basename.exe" -Force
+            }
+          }
+
+          # Handle changelog file: look for changelog.md or changelog
+          if (Test-Path changelog.md) {
+            Copy-Item changelog.md ../../../release_body.md
+          } elseif (Test-Path changelog) {
+            Copy-Item changelog ../../../release_body.md
+          } else {
+            "No changelog found." | Out-File ../../../release_body.md
+          }
+
+          # Prepare dist_upload directory and copy exes
+          New-Item -Path ../../../dist_upload -ItemType Directory -Force | Out-Null
+          Copy-Item dist/*.exe ../../../dist_upload/
+
+          Set-Location ../..
+          "`n## Commit History" | Add-Content release_body.md
+          git log --pretty=format:"- %h %s (%an, %ad)" --date=short | Add-Content release_body.md
+          "tag=v$highest_folder" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
