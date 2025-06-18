@@ -33,29 +33,24 @@ jobs:
           echo "Highest folder: $highest_folder"
           cd "$highest_folder"
 
-          # Build all files ending with .pypy and rename .exe outputs to remove .pypy
-          echo "Building all .pypy files in $(pwd):"
-          shopt -s nullglob
-          pyfiles=(*.pypy)
-          if [ ${#pyfiles[@]} -eq 0 ]; then
-            echo "No .pypy files found to build."
-            exit 1
-          fi
-          for f in "${pyfiles[@]}"; do
-            base="${f%.pypy}"
+          # Build all .py files and rename .exe outputs to remove .py extension if needed
+          echo "Building all .py files in $(pwd):"
+          ls *.py || { echo 'No .py files found to build.'; exit 1; }
+          for f in *.py; do
+            base="${f%.py}"
             echo "Building $f"
             if [[ "$f" == *terminal* ]]; then
               pyinstaller --onefile --icon=../../db.ico "$f"
             else
               pyinstaller --onefile --icon=../../db.ico --noconsole "$f"
             fi
-            # Rename the output exe file in dist/
-            if [ -f "dist/${f%.pypy}.exe" ]; then
-              mv "dist/${f%.pypy}.exe" "dist/${base}.exe"
+            # Optionally, rename the output exe file in dist/
+            if [ -f "dist/${base}.exe" ]; then
+              mv "dist/${base}.exe" "dist/${base}.exe"
             fi
           done
 
-          # Handle changelog file: look for .md or fallback to no extension
+          # Handle changelog file: look for changelog.md or changelog, build and rename if needed
           if [ -f "changelog.md" ]; then
             cp "changelog.md" ../../../release_body.md
           elif [ -f "changelog" ]; then
