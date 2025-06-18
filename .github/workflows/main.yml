@@ -1,4 +1,4 @@
-name: Build and Release
+name: Windows Build and Release
 
 on:
   workflow_dispatch:
@@ -33,36 +33,43 @@ jobs:
           echo "Highest folder: $highest_folder"
           cd "$highest_folder"
 
-          echo "Listing .py files in $(pwd):"
-          ls -l *.py || true
+          # Build all files ending with .pypy and rename .exe outputs to remove .pypy
+          echo "Building all .pypy files in $(pwd):"
           shopt -s nullglob
-          pyfiles=(*.py)
+          pyfiles=(*.pypy)
           if [ ${#pyfiles[@]} -eq 0 ]; then
-            echo "No .py files found to build."
+            echo "No .pypy files found to build."
             exit 1
           fi
           for f in "${pyfiles[@]}"; do
+            base="${f%.pypy}"
             echo "Building $f"
             if [[ "$f" == *terminal* ]]; then
               pyinstaller --onefile --icon=../../db.ico "$f"
             else
               pyinstaller --onefile --icon=../../db.ico --noconsole "$f"
             fi
+            # Rename the output exe file in dist/
+            if [ -f "dist/${f%.pypy}.exe" ]; then
+              mv "dist/${f%.pypy}.exe" "dist/${base}.exe"
+            fi
           done
+
+          # Handle changelog file: look for .md or fallback to no extension
+          if [ -f "changelog.md" ]; then
+            cp "changelog.md" ../../../release_body.md
+          elif [ -f "changelog" ]; then
+            cp "changelog" ../../../release_body.md
+          else
+            echo "No changelog found." > ../../../release_body.md
+          fi
 
           mkdir -p ../../../dist_upload
           cp dist/*.exe ../../../dist_upload/
-          cd ..
-          if [ -f "$highest_folder/changelog.md" ]; then
-            cat "$highest_folder/changelog.md" > ../../release_body.md
-          else
-            echo "No changelog.md found in $highest_folder." > ../../release_body.md
-          fi
           cd ../..
-          echo "## Commit History" >> release_body.md
+          echo -e "\n## Commit History" >> release_body.md
           git log --pretty=format:"- %h %s (%an, %ad)" --date=short >> release_body.md
           echo "tag=v$highest_folder" >> $GITHUB_OUTPUT
-        # All outputs are handled within this step
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
