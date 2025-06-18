@@ -1,5 +1,6 @@
 ![LinuxDBAssistant](https://github.com/user-attachments/assets/67e10e60-949f-417c-bee5-6a8897df35b0)
-This is for assisting Windows Users to Dual Boot Windows and Linux without an USB Drive, giving them options to assist them!
+
+This is for assisting Windows Users to install Linux on their machines without a USB.
 
 [![License](https://img.shields.io/github/license/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/CharaUTnDT/LinuxDBAssistant?label=release)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases)
@@ -11,10 +12,9 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 [![Last Commit](https://img.shields.io/github/last-commit/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/commits)
 [![Last Release Date](https://img.shields.io/github/release-date/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/releases)
 # Options
-- Open Disk management
-- Extract the iso to a specific partition using 7zip or NanaZip (7zip needs to be on the path.)
+- Extract the ISO to a specific partition using 7zip or NanaZip (7zip needs to be on the path.)
 - Verify ISO Integrity (It needs to be a sha256 or md5 hash, OpenPGP support is planned)
-- Change localtime to UTC Time (Proceed with caution!) (I think if you dual booted before you noticed the time was off every restart you did to Windows. Well, with this option, both Linux and Windows will be using UTC time, which means, no more errors in time with this!)
+- Change Local Time to UTC Time (Proceed with caution!) (I think if you dual booted before you noticed the time was off every restart you did to Windows. Well, with this option, both Linux and Windows will be using UTC time, which means, no more errors in time with this!)
 - Redirect user to MiniTool´s Partition Wizard (This should only be used in case Disk Management doesn´t allow the user to shrink the necessary space, otherwise you should use Disk Management.)
 - Choose your distro!
 - Show the list of currently known unsupported distros.
@@ -37,14 +37,9 @@ This is for assisting Windows Users to Dual Boot Windows and Linux without an US
 - Follow the install process for your distribution!
 # Questions you will probably ask.
 - Q: Why did you create this?
-- A: I installed linux a bunch of times on my friend´s laptop, without any USB, just booting from EFI files natively. When i got my PC that came with Windows 10, i was excited to install Linux on it, but was dissapointed because of my motherboard not having a option to boot from EFI files. I then remembered this frustation a few days ago, and decided to bring the fix to life!
+- A: I got frustrated because i couldn´t install linux without a USB on my PC, so i decided to do some research and bring the fix to life.
 - Q: Why python?
-- A: Python was the easiest option.
+- A: I heard a bunch of times that Python is good for beginners. 
 # License
-The license that this project is using, is MIT, you can see the details of the license on the section for the License.
-# Why is there no more files on the source code?
-Removed all the added files because the source code was getting messy, and the powershell script is now deprecated so there is now no use for the versions folder.
-If you want to compile the .exe file yourself, there's a tutorial here: https://github.com/CharaDreemurrUTnDT/LinuxDBAssistant/blob/main/Compiling.md
-# Distros that do not support this method
-- Debian
-- EndeavourOS
+[![License](https://img.shields.io/github/license/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/LICENSE)
+# [Unsupported Distros](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/UnsupportedDistros.md)
