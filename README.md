@@ -1,4 +1,5 @@
-![LinuxDBAssistant](https://github.com/user-attachments/assets/67e10e60-949f-417c-bee5-6a8897df35b0)
+![12 Sem Título_20250618230020](https://github.com/user-attachments/assets/d10c7e4b-277f-4d3c-aa88-7e337493b545)
+
 
 This is for assisting Windows Users to install Linux on their machines without a USB.
 
