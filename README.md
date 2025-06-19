@@ -40,7 +40,8 @@ This is for assisting Windows Users to install Linux on their machines without a
 - Q: Why did you create this?
 - A: I got frustrated because i couldn´t install linux without a USB on my PC, so i decided to do some research and bring the fix to life.
 - Q: Why python?
-- A: I heard a bunch of times that Python is good for beginners. 
+- A: I heard a bunch of times that Python is good for beginners.
+## [Unsupported Distros](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/UnsupportedDistros.md)
 # License
 [![License](https://img.shields.io/github/license/CharaUTnDT/LinuxDBAssistant)](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/LICENSE)
-# [Unsupported Distros](https://github.com/CharaUTnDT/LinuxDBAssistant/blob/main/UnsupportedDistros.md)
+
