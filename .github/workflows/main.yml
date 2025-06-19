@@ -1,0 +1,100 @@
+name: Build and Release Windows EXEs
+
+on:
+  push:
+    tags:
+      - 'v*.*'  # Trigger on version tags like v3.0
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller requests pillow pywebview
+
+      - name: Find Python files and build EXEs
+        id: build_exes
+        shell: bash
+        run: |
+          mkdir -p dist_exe
+          ICON="db.ico"
+          OUTPUTS=""
+          for f in *.py; do
+            [[ ! -f "$f" ]] && continue
+            BASENAME="${f%.py}"
+            if [[ "$f" == *terminal* ]]; then
+              pyinstaller --onefile --icon "$ICON" "$f"
+            else
+              pyinstaller --onefile --windowed --icon "$ICON" "$f"
+            fi
+            cp "dist/$BASENAME.exe" "dist_exe/$BASENAME.exe"
+            OUTPUTS="$OUTPUTS dist_exe/$BASENAME.exe"
+          done
+          echo "output_files=$OUTPUTS" >> $GITHUB_OUTPUT
+
+      - name: Extract version from filename
+        id: version
+        shell: bash
+        run: |
+          VERSION=""
+          for f in *.py; do
+            if [[ "$f" =~ ([0-9]+(\.[0-9]+)+) ]]; then
+              VERSION="${BASH_REMATCH[1]}"
+              break
+            fi
+          done
+          if [[ -z "$VERSION" ]]; then
+            echo "No version number found in Python filenames."
+            exit 1
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+          echo "release_name=DB Assistant $VERSION" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog description
+        id: changelog
+        shell: bash
+        run: |
+          DESC=""
+          if [[ -f changelog.md ]]; then
+            DESC="$(cat changelog.md)"
+          fi
+          echo "desc<<EOF" >> $GITHUB_OUTPUT
+          echo "$DESC" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Generate commit history
+        id: commits
+        shell: bash
+        run: |
+          HISTORY=$(git log --pretty=format:"- %s (%an, %ad)" --date=short --reverse)
+          echo "history<<EOF" >> $GITHUB_OUTPUT
+          echo "$HISTORY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.release_name }}
+          body: |
+            ${{ steps.changelog.outputs.desc }}
+
+            ## Commit History
+            ${{ steps.commits.outputs.history }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        files: |
+          dist_exe/*.exe
+          *.py
